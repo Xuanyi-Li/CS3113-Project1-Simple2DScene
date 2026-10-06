@@ -50,26 +50,21 @@ float gEarthRotation  = 0.0f;
 float gSunPulseTime   = 0.0f;
 float gSunScale       = 1.0f;
 
-void initialise()
-{
+void initialise(){
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Project 1 - Simple 2D Scene");
     SetTargetFPS(FPS);
-
     gSunTexture   = LoadTexture("sun.png");
     gEarthTexture = LoadTexture("earth.png");
     gMoonTexture  = LoadTexture("moon.png");
 }
 
-void processInput()
-{
-    if (IsKeyPressed(KEY_ESCAPE))
-    {
+void processInput(){
+    if (IsKeyPressed(KEY_ESCAPE)){
         CloseWindow();
     }
 }
 
-void update(float deltaTime)
-{
+void update(float deltaTime){
     // All animation values use delta time.
     gSunMoveTime    += SUN_MOVE_SPEED * deltaTime;
     gEarthOrbitTime += EARTH_ORBIT_SPEED * deltaTime;
@@ -95,9 +90,7 @@ void update(float deltaTime)
     gMoonPosition.y = gEarthPosition.y + sinf(gMoonOrbitTime) * MOON_RADIUS_Y;
 }
 
-void drawTextureCentered(Texture2D texture, Vector2 position,
-                         float size, float rotation)
-{
+void drawTextureCentered(Texture2D texture, Vector2 position, float size, float rotation){
     Rectangle source = {
         0.0f,
         0.0f,
@@ -120,18 +113,12 @@ void drawTextureCentered(Texture2D texture, Vector2 position,
     DrawTexturePro(texture, source, destination, origin, rotation, WHITE);
 }
 
-void render()
-{
-    // Extra credit: background changes gradually in a repeating pattern.
-    unsigned char blue =
-        static_cast<unsigned char>(35 + 20 * (sinf(gSunPulseTime * 0.35f) + 1.0f));
-
+void render(){
+    unsigned char blue = static_cast<unsigned char>(35 + 20 * (sinf(gSunPulseTime * 0.35f) + 1.0f));
     Color background = { 8, 12, blue, 255 };
-
     BeginDrawing();
     ClearBackground(background);
 
-    // Optional orbit guides make the relationships easy to see.
     DrawEllipseLines(
         static_cast<int>(gSunPosition.x),
         static_cast<int>(gSunPosition.y),
@@ -172,27 +159,21 @@ void render()
     EndDrawing();
 }
 
-void shutdown()
-{
+void shutdown(){
     UnloadTexture(gSunTexture);
     UnloadTexture(gEarthTexture);
     UnloadTexture(gMoonTexture);
     CloseWindow();
 }
 
-int main()
-{
+int main(){
     initialise();
-
-    while (!WindowShouldClose())
-    {
+    while (!WindowShouldClose()){
         float deltaTime = GetFrameTime();
-
         processInput();
         update(deltaTime);
         render();
     }
-
     shutdown();
     return 0;
 }
