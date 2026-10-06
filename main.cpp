@@ -55,9 +55,9 @@ void initialise()
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Project 1 - Simple 2D Scene");
     SetTargetFPS(FPS);
 
-    gSunTexture   = LoadTexture("assets/sun.png");
-    gEarthTexture = LoadTexture("assets/earth.png");
-    gMoonTexture  = LoadTexture("assets/moon.png");
+    gSunTexture   = LoadTexture("sun.png");
+    gEarthTexture = LoadTexture("earth.png");
+    gMoonTexture  = LoadTexture("moon.png");
 }
 
 void processInput()
